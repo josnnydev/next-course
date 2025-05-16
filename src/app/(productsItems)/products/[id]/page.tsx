@@ -1,15 +1,5 @@
 import Image from "next/image";
-
-interface ProductProps {
-    params: {
-        id: string;
-        
-    }
-    searchParams: {
-        name?: string;
-        products?: string;
-    }
-}
+ 
 
 interface Product {
     id: number;
@@ -20,11 +10,21 @@ interface Product {
 }
 
 
-async function Product({params,searchParams}: ProductProps) {
-    const { id } = params;
-    const { name,products } = searchParams;
+async function Product({
+  params,
+  searchParams,
+}: {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
 
-    const parsedProducts = products ? JSON.parse(products) : [];
+  const { id } = params;
+  const name = typeof searchParams.name === "string" ? searchParams.name : "";
+  const productsParams = typeof searchParams.products === "string" ? searchParams.products : "[]";
+
+
+   const parsedProducts = typeof productsParams === "string" ? JSON.parse(productsParams) : [];
+
 
     return (
         <div>

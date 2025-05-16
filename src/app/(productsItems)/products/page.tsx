@@ -1,7 +1,7 @@
 
 import Link from "next/link";
 
-function Products() {
+ function Products() {
   const productsList = [
     {
       id: 1,
